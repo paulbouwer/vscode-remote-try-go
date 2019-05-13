@@ -13,7 +13,11 @@ Follow these steps to open this sample in a container:
 2. If you're not yet in a development container:
    - Clone this repository.
    - Press <kbd>F1</kbd> and select the **Remote-Containers: Open Folder in Container...** command.
-   - Select the cloned copy of this folder, wait for the container to start, and try things out!
+   - Select the cloned copy of this folder, and wait for the container to start.
+   - Press <kbd>F1</kbd> and select the **Workspaces: Open Workspace...**
+   - Select `.vscode-remote-try-go.code-workspace`, and wait for workspace to open.
+   - Open a `bash` terminal from the terminal window. Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>\`</kbd>
+   - Try things out!
 
 ## Things to try
 
@@ -22,18 +26,22 @@ Once you have this sample opened in a container, you'll be able to work with it 
 Some things to try:
 
 1. **Edit:**
-   - Open `server.go`
+   - Open `cmd/server/main.go`
    - Try adding some code and check out the language features.
-2. **Terminal:** Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>\`</kbd> and type `uname` and other Linux commands from the terminal window.
-2. **Build, Run, and Debug:**
-   - Open `server.go`
+2. **Terminal:** Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>\`</kbd>
+   - Type `uname` and other Linux commands from the terminal window.
+   - Notice that the terminal has a current working directory of `/go/src/vscode-remote-try-go`.
+   - Type `go env` and notice that the gopath has been configured to `/go`
+3. **Build, Run, and Debug:**
+   - Run `make install-dependencies` from the terminal window to ensure that any dependencies have been resolved. This example uses dep and will place dependencies in the `vendor` folder. Examine the `Makefile` for other options.
+   - Open `cmd/server/main.go`
    - Add a breakpoint (e.g. on line 22).
    - Press <kbd>F5</kbd> to launch the app in the container.
    - Once the breakpoint is hit, try hovering over variables, examining locals, and more.
    - Continue, then open a local browser and go to `http://localhost:9000` and note you can connect to the server in the container.
-3. **Forward another port:**
+4. **Forward another port:**
    - Stop debugging and remove the breakpoint.
-   - Open `server.go`
+   - Open `cmd/server/main.go`
    - Change the server port to 5000. (`portNumber := "5000"`)
    - Press <kbd>F5</kbd> to launch the app in the container.
    - Press <kbd>F1</kbd> and run the **Remote-Containers: Forward Port from Container...** command.

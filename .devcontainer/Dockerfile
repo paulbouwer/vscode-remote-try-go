@@ -31,8 +31,23 @@ RUN go get -x -d github.com/stamblerre/gocode \
 # Copy default endpoint specific user settings overrides into container to specify Go path
 COPY settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
 
-# Verify git, process tools installed
-RUN apt-get update && apt-get -y install git procps
+# Install dep
+RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+
+# Install git, process tools and other dependencies
+RUN apt-get update && apt-get -y install \
+  curl \
+  git \
+  make \
+  gcc \
+  tree \
+  vim \
+  procps
+
+# Drop user into correct working folder for go code in the terminal
+RUN echo "cd /go/src/vscode-remote-try-go" >> ~/.bashrc
+
+WORKDIR /go/src
 
 # Clean up
 RUN apt-get autoremove -y \

@@ -9,5 +9,8 @@
 		"--cap-add=SYS_PTRACE",
 		"--security-opt",
 		"seccomp=unconfined"
+	],
+	"postCreateCommand": [
+		"ln", "-s", "/workspaces/vscode-remote-try-go", "/go/src/vscode-remote-try-go"
 	]
 }
